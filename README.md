@@ -30,7 +30,7 @@ ansible-playbook -i kubespray/inventory/hosts.ini -u ubuntu -b kubespray/cluster
 
 ## Authors
 
-* **Xu Deng** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Xu Deng** - *Initial work* - [Xu Deng](https://github.com/d8660091)
 
 ## License
 
