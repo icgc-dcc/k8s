@@ -1,0 +1,8 @@
+node-count="5"
+network-name="OICR_net"
+floating-ip-pool="ext-net"
+image-name="Ubuntu 18.04 - latest"
+image-flavor="c1.small"
+security-groups="default,all"
+key-pair="xu_key"
+inventory-path="kubespray/inventory/icgc"
