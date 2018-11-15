@@ -1,8 +1,9 @@
-variable "node-count" {}
-variable "network-name" {}
-variable "floating-ip-pool" {}
-variable "image-name" {}
-variable "image-flavor" {}
-variable "security-groups" {}
-variable "key-pair" {}
-variable "inventory-path" {}
+variable "master_count" {}
+variable "node_count" {}
+variable "network_name" {}
+variable "floating_ip_pool" {}
+variable "image_id" {}
+variable "image_flavor" {}
+variable "security_groups" {}
+variable "key_pair" {}
+variable "inventory_path" {}
