@@ -14,4 +14,4 @@ security_groups = "default,all"
 
 key_pair = "xu_key"
 
-inventory_path = "kubespray/inventory/icgc"
+inventory_path = "icgc"
