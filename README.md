@@ -28,6 +28,11 @@ cp -rfp kubespray/inventory/sample/* kubespray/inventory/$your-inventory-name # 
 ansible-playbook -i kubespray/inventory/hosts.ini -u ubuntu -b kubespray/cluster.ym # Deploy kubespray to OpenStack
 ```
 
+## Trouble shooting
+- Ingress nginx does not work after openstack VMs restarting
+
+  It's caused by flannel and kube proxy. Restart the related pods will fix the issue, i.e. `kubectl -n kube-system delete pod -l k8s-app=flannel`. Replace flannel in the command with kube-proxy to restart kube-proxy.
+
 ## Authors
 
 * **Xu Deng** - *Initial work* - [Xu Deng](https://github.com/d8660091)
