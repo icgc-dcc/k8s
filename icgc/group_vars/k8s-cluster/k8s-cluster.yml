@@ -20,7 +20,7 @@ kube_users_dir: "{{ kube_config_dir }}/users"
 kube_api_anonymous_auth: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-kube_version: v1.13.5
+kube_version: v1.14.1
 
 # kubernetes image repo define
 kube_image_repo: "gcr.io/google-containers"
@@ -70,9 +70,9 @@ kube_users:
 # kube_oidc_groups_prefix: oidc:
 
 
-# Choose network plugin (cilium, calico, contiv, weave or flannel)
+# Choose network plugin (cilium, calico, contiv, weave or flannel. Use cni for generic cni plugin)
 # Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
-kube_network_plugin: flannel
+kube_network_plugin: weave
 
 # Setting multi_networking to true will install Multus: https://github.com/intel/multus-cni
 kube_network_plugin_multus: false
@@ -132,13 +132,13 @@ dns_mode: coredns
 # Set manual server if using a custom cluster DNS server
 # manual_dns_server: 10.x.x.x
 # Enable nodelocal dns cache
-enable_nodelocaldns: False
+enable_nodelocaldns: true
 nodelocaldns_ip: 169.254.25.10
 
 # Can be docker_dns, host_resolvconf or none
 resolvconf_mode: docker_dns
 # Deploy netchecker app to verify DNS resolve as an HTTP service
-deploy_netchecker: false
+deploy_netchecker: true
 # Ip address of the kubernetes skydns service
 skydns_server: "{{ kube_service_addresses|ipaddr('net')|ipaddr(3)|ipaddr('address') }}"
 skydns_server_secondary: "{{ kube_service_addresses|ipaddr('net')|ipaddr(4)|ipaddr('address') }}"
@@ -152,6 +152,10 @@ container_manager: docker
 etcd_deployment_type: docker
 kubelet_deployment_type: host
 helm_deployment_type: host
+
+# Enable kubeadm experimental control plane
+kubeadm_control_plane: false
+kubeadm_certificate_key: "{{ lookup('password', credentials_dir + '/kubeadm_certificate_key.creds length=64 chars=hexdigits') | lower }}"
 
 # K8s image pull policy (imagePullPolicy)
 k8s_image_pull_policy: IfNotPresent
@@ -174,6 +178,7 @@ podsecuritypolicy_enabled: false
 # kubeconfig_localhost: false
 # Download kubectl onto the host that runs Ansible in {{ bin_dir }}
 # kubectl_localhost: false
+
 
 #  Enable creation of QoS cgroup hierarchy, if true top level QoS and pod cgroups are created. (default true)
 # kubelet_cgroups_per_qos: true
