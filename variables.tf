@@ -4,6 +4,7 @@ variable "network_name" {}
 variable "floating_ip_pool" {}
 variable "image_id" {}
 variable "image_flavor" {}
-variable "security_groups" {}
+variable "security_groups_master" {}
+variable "security_groups_slave" {}
 variable "key_pair" {}
 variable "inventory_path" {}

@@ -35,6 +35,8 @@ local_volume_provisioner_enabled: false
 #   local-storage:
 #     host_dir: /mnt/disks
 #     mount_dir: /mnt/disks
+#     volume_mode: Filesystem
+#     fs_type: ext4
 #   fast-disks:
 #     host_dir: /mnt/fast-disks
 #     mount_dir: /mnt/fast-disks
@@ -94,7 +96,7 @@ ingress_nginx_tolerations:
 # ingress_nginx_configmap_tcp_services:
 #   9000: "default/example-go:8080"
 # ingress_nginx_configmap_udp_services:
-#   53: "kube-system/kube-dns:53"
+#   53: "kube-system/coredns:53"
 
 # Cert manager deployment
 cert_manager_enabled: false

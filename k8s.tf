@@ -1,3 +1,10 @@
+terraform {
+  required_providers {
+    openstack = ">= 1.22.0"
+    local = ">= 1.3.0"
+  }
+}
+
 # Create a single master node and floating IP
 resource "openstack_compute_instance_v2" "k8s-master" {
   count           = "${var.master_count}"
@@ -5,7 +12,7 @@ resource "openstack_compute_instance_v2" "k8s-master" {
   image_id        = "${var.image_id}"
   flavor_name     = "${var.image_flavor}"
   key_pair        = "${var.key_pair}"
-  security_groups = ["${split(",", var.security_groups)}"]
+  security_groups = "${split(",", var.security_groups_master)}"
 
   network {
     name = "${var.network_name}"
@@ -30,9 +37,10 @@ resource "openstack_compute_instance_v2" "k8s-node" {
   image_id        = "${var.image_id}"
   flavor_name     = "${var.image_flavor}"
   key_pair        = "${var.key_pair}"
-  security_groups = ["${split(",", var.security_groups)}"]
+  security_groups = "${split(",", var.security_groups_slave)}"
 
-  network {name = "${var.network_name}"
+  network {
+    name = "${var.network_name}"
   }
 }
 
